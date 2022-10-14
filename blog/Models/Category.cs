@@ -10,15 +10,15 @@ using System.Threading.Tasks;
 
 namespace blog.Models
 {
-    public class Referanslar
+    public class Category
     {
         [Key]
         public int Id { get; set; }
         public string Baslik { get; set; }
         public string Description { get; set; }
-        public string ReferansBilgileri { get; set; }
         public string ResimYol { get; set; }
         [NotMapped]
         public IFormFile Resim { get; set; }
+        public List<Blog> Blogs { get; set; }
     }
 }

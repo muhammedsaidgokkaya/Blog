@@ -24,6 +24,21 @@ namespace blog.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Categories",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    Baslik = table.Column<string>(type: "text", nullable: true),
+                    Description = table.Column<string>(type: "text", nullable: true),
+                    ResimYol = table.Column<string>(type: "text", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Categories", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Footers",
                 columns: table => new
                 {
@@ -35,30 +50,6 @@ namespace blog.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Footers", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Hakkimizdas",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    Baslik = table.Column<string>(type: "text", nullable: true),
-                    Description = table.Column<string>(type: "text", nullable: true),
-                    MisyonumuzBaslik = table.Column<string>(type: "text", nullable: true),
-                    MisyonumuzDescription = table.Column<string>(type: "text", nullable: true),
-                    VizyonBaslik = table.Column<string>(type: "text", nullable: true),
-                    VizyonDescription = table.Column<string>(type: "text", nullable: true),
-                    NedenBizBaslik = table.Column<string>(type: "text", nullable: true),
-                    NedenBizDescription = table.Column<string>(type: "text", nullable: true),
-                    BizKimizBaslik = table.Column<string>(type: "text", nullable: true),
-                    BizKimizDescription = table.Column<string>(type: "text", nullable: true),
-                    EkibimizBaslik = table.Column<string>(type: "text", nullable: true),
-                    EkibimizDescription = table.Column<string>(type: "text", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Hakkimizdas", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -83,22 +74,6 @@ namespace blog.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Referanslars",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    Baslik = table.Column<string>(type: "text", nullable: true),
-                    Description = table.Column<string>(type: "text", nullable: true),
-                    ReferansBilgileri = table.Column<string>(type: "text", nullable: true),
-                    ResimYol = table.Column<string>(type: "text", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Referanslars", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "UserMesajs",
                 columns: table => new
                 {
@@ -113,6 +88,38 @@ namespace blog.Migrations
                 {
                     table.PrimaryKey("PK_UserMesajs", x => x.Id);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "Blogs",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    Baslik = table.Column<string>(type: "text", nullable: true),
+                    Konu = table.Column<string>(type: "text", nullable: true),
+                    Description = table.Column<string>(type: "text", nullable: true),
+                    Tarih = table.Column<string>(type: "text", nullable: true),
+                    Popular = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    Trend = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    ResimYol = table.Column<string>(type: "text", nullable: true),
+                    CategoryId = table.Column<int>(type: "int", nullable: false),
+                    CategoryBaslik = table.Column<string>(type: "text", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Blogs", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Blogs_Categories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "Categories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Blogs_CategoryId",
+                table: "Blogs",
+                column: "CategoryId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -121,19 +128,19 @@ namespace blog.Migrations
                 name: "AdminMesajs");
 
             migrationBuilder.DropTable(
-                name: "Footers");
+                name: "Blogs");
 
             migrationBuilder.DropTable(
-                name: "Hakkimizdas");
+                name: "Footers");
 
             migrationBuilder.DropTable(
                 name: "Iletisims");
 
             migrationBuilder.DropTable(
-                name: "Referanslars");
+                name: "UserMesajs");
 
             migrationBuilder.DropTable(
-                name: "UserMesajs");
+                name: "Categories");
         }
     }
 }

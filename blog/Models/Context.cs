@@ -14,9 +14,9 @@ namespace blog.Models
         }
         public DbSet<Iletisim> Iletisims { get; set; }
         public DbSet<Footer> Footers { get; set; }
-        public DbSet<Hakkimizda> Hakkimizdas { get; set; }
-        public DbSet<Referanslar> Referanslars { get; set; }
         public DbSet<AdminMesaj> AdminMesajs { get; set; }
         public DbSet<UserMesaj> UserMesajs { get; set; }
+        public DbSet<Blog> Blogs { get; set; }
+        public DbSet<Category> Categories { get; set; }
     }
 }
