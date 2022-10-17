@@ -28,7 +28,8 @@
   <ItemGroup>
     <Folder Include="ViewComponents\" />
     <Folder Include="Views\Shared\Components\" />
-    <Folder Include="wwwroot\Resimler\ReferansResim\" />
+    <Folder Include="wwwroot\Resimler\Category\" />
+    <Folder Include="wwwroot\Resimler\Blog\" />
   </ItemGroup>
 
 </Project>

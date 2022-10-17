@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Components.Routing;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -32,7 +33,8 @@ namespace blog.Controllers
 
         public IActionResult Category()
         {
-            return View();
+            var a = c.Categories.ToList();
+            return View(a);
         }
 
         public IActionResult CategoryAdd()
@@ -40,34 +42,137 @@ namespace blog.Controllers
             return View();
         }
 
-        public IActionResult CategoryUpdate()
+        [HttpPost]
+        public async Task<IActionResult> CategoryAdd(Category category)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                string wwwRootPath = _webHost.WebRootPath;
+                string filename = Path.GetFileNameWithoutExtension(category.Resim.FileName);
+                string extension = Path.GetExtension(category.Resim.FileName);
+                category.ResimYol = filename = filename + DateTime.Now.ToString("yymmssfff") + extension;
+                string path = Path.Combine(wwwRootPath + "/Resimler/Category/", filename);
+                using (var filestream = new FileStream(path, FileMode.Create))
+                {
+                    await category.Resim.CopyToAsync(filestream);
+                }
+                c.Categories.Add(category);
+                c.SaveChanges();
+            }
+            return RedirectToAction("Category", "Admin");
         }
 
-        public IActionResult CategoryDelete()
+        public IActionResult CategoryUpdate(int id)
         {
-            return View();
+            var guncelle = c.Categories.Find(id);
+            return View(guncelle);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CategoryUpdate(Category category)
+        {
+            if (ModelState.IsValid)
+            {
+                string wwwRootPath = _webHost.WebRootPath;
+                string filename = Path.GetFileNameWithoutExtension(category.Resim.FileName);
+                string extension = Path.GetExtension(category.Resim.FileName);
+                category.ResimYol = filename = filename + DateTime.Now.ToString("yymmssfff") + extension;
+                string path = Path.Combine(wwwRootPath + "/Resimler/Category/", filename);
+                using (var filestream = new FileStream(path, FileMode.Create))
+                {
+                    await category.Resim.CopyToAsync(filestream);
+                }
+                c.Categories.Update(category);
+                c.SaveChanges();
+            }
+            return RedirectToAction("Category", "Admin");
+        }
+
+        public IActionResult CategoryDelete(int id)
+        {
+            var sil = c.Categories.Find(id);
+            c.Categories.Remove(sil);
+            c.SaveChanges();
+            return RedirectToAction("Category", "Admin");
         }
 
         public IActionResult Blog()
         {
-            return View();
+            var a = c.Blogs.ToList();
+            return View(a);
         }
 
         public IActionResult BlogEkle()
         {
+            var value = c.Categories.ToList();
+            List<SelectListItem> CategoryList = (from x in value
+                                                 select new SelectListItem
+                                                 {
+                                                     Text = x.Baslik,
+                                                     Value = x.Id.ToString()
+                                                 }).ToList();
+            ViewBag.Category = CategoryList;
             return View();
         }
-
-        public IActionResult BlogDuzenle()
+        [HttpPost]
+        public async Task<IActionResult> BlogEkle(Blog blog)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                string wwwRootPath = _webHost.WebRootPath;
+                string filename = Path.GetFileNameWithoutExtension(blog.Resim.FileName);
+                string extension = Path.GetExtension(blog.Resim.FileName);
+                blog.ResimYol = filename = filename + DateTime.Now.ToString("yymmssfff") + extension;
+                string path = Path.Combine(wwwRootPath + "/Resimler/Blog/", filename);
+                using (var filestream = new FileStream(path, FileMode.Create))
+                {
+                    await blog.Resim.CopyToAsync(filestream);
+                }
+                c.Blogs.Add(blog);
+                c.SaveChanges();
+            }
+            return RedirectToAction("Blog", "Admin");
         }
 
-        public IActionResult BlogSil()
+        public IActionResult BlogDuzenle(int id)
         {
-            return View();
+            var value = c.Categories.ToList();
+            List<SelectListItem> CategoryList = (from x in value
+                                                 select new SelectListItem
+                                                 {
+                                                     Text = x.Baslik,
+                                                     Value = x.Id.ToString()
+                                                 }).ToList();
+            ViewBag.Category = CategoryList;
+            var guncelle = c.Blogs.Find(id);
+            return View(guncelle);
+        }
+        [HttpPost]
+        public async Task<IActionResult> BlogDuzenle(Blog blog)
+        {
+            if (ModelState.IsValid)
+            {
+                string wwwRootPath = _webHost.WebRootPath;
+                string filename = Path.GetFileNameWithoutExtension(blog.Resim.FileName);
+                string extension = Path.GetExtension(blog.Resim.FileName);
+                blog.ResimYol = filename = filename + DateTime.Now.ToString("yymmssfff") + extension;
+                string path = Path.Combine(wwwRootPath + "/Resimler/Blog/", filename);
+                using (var filestream = new FileStream(path, FileMode.Create))
+                {
+                    await blog.Resim.CopyToAsync(filestream);
+                }
+                c.Blogs.Update(blog);
+                c.SaveChanges();
+            }
+            return RedirectToAction("Blog", "Admin");
+        }
+
+        public IActionResult BlogSil(int id)
+        {
+            var sil = c.Blogs.Find(id);
+            c.Blogs.Remove(sil);
+            c.SaveChanges();
+            return RedirectToAction("Blog", "Admin");
         }
 
         public IActionResult MesajKutusu()

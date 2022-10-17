@@ -1,8 +1,46 @@
-﻿
+﻿@using blog.Models
+@model List<Category>
+
 @{
     ViewData["Title"] = "Category";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h1>Category</h1>
+<div class="wrapper style1 first">
+    <article class="container" id="top">
+        <div class="row">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Kategori Numarası</th>
+                        <th scope="col">Kategori İsmi</th>
+                        <th scope="col">Kategori Açıklaması</th>
+                        <th scope="col">Resim</th>
+                        <th scope="col">Düzenle</th>
+                        <th scope="col">Sil</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var x in Model)
+                    {
+                        <tr>
+                            <th scope="row">#</th>
+                            <td>@x.Id</td>
+                            <td>@x.Baslik</td>
+                            <td>@x.Description</td>
+                            <td><img src="~/Resimler/Category/@x.ResimYol" style="width:20%;" /></td>
 
+                            <td>
+                                <a class="btn btn-primary" href="~/Admin/CategoryUpdate/@x.Id" role="button">Düzenle</a>
+                            </td>
+                            <td>
+                                <a class="btn btn-primary" href="~/Admin/CategoryDelete/@x.Id" role="button">Sil</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </article>
+</div>
