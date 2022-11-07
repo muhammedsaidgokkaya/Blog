@@ -1,8 +1,67 @@
-﻿
+﻿@using blog.Models
+@model Blog
+
 @{
     ViewData["Title"] = "BlogEkle";
     Layout = "~/Views/Shared/_UserLayout.cshtml";
 }
 
-<h1>BlogEkle</h1>
-
+<div>
+    <!-- start: sidebar -->
+    <!-- end: sidebar -->
+    <section role="main" class="content-body content-body-modern mt-0">
+        <header class="page-header page-header-left-inline-breadcrumb">
+            <h2 class="font-weight-bold text-6">Blog Ekle</h2>
+        </header>
+        <div class="container">
+            <form method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label>Kategori Numarası</label>
+                    @Html.DropDownListFor(x => x.CategoryBaslik, (List<SelectListItem>)ViewBag.Category, new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    <label>Başlık</label>
+                    <input type="text" class="form-control" name="Baslik" />
+                </div>
+                <div class="form-group">
+                    <label>Tarih</label>
+                    <input type="text" class="form-control" name="Tarih" />
+                </div>
+                <div class="form-group">
+                    <label>Konu</label>
+                    <input type="text" class="form-control" name="Konu" />
+                </div>
+                <div class="form-group">
+                    <label>Açıklama</label>
+                    <input type="text" class="form-control" name="Description" />
+                </div>
+                <div class="form-group row pb-4">
+                    <label class="col-lg-3 control-label text-lg-end pt-2"></label>
+                    <div class="col-lg-6">
+                        <div class="fileupload fileupload-new" data-provides="fileupload">
+                            <div class="input-append">
+                                <div class="uneditable-input">
+                                    <i class="fas fa-file fileupload-exists"></i>
+                                    <span class="fileupload-preview"></span>
+                                </div>
+                                <span class="btn btn-default btn-file">
+                                    <span class="fileupload-new">Dosyayı Seçiniz</span>
+                                    <input type="file" name="Resim" required />
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Popüler</label>
+                    <input type="text" class="form-control" name="Popular" />
+                </div>
+                <div class="form-group">
+                    <label>Trend</label>
+                    <input type="text" class="form-control" name="Trend" />
+                </div>
+                <button type="submit" class="btn btn-primary" value="kaydet">Kaydet</button>
+            </form>
+        </div>
+    </section>
+</div>
