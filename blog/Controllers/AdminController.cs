@@ -180,14 +180,32 @@ namespace blog.Controllers
             return View();
         }
 
-        public IActionResult AdminMesajSil()
+        public IActionResult AdminMesajDetails(int? id)
         {
-            return View();
+            var a = c.AdminMesajs.Find(id);
+            return View(a);
+        }
+        
+        public IActionResult UserMesajDetails(int? id)
+        {
+            var a = c.UserMesajs.Find(id);
+            return View(a);
         }
 
-        public IActionResult UserMesajSil()
+        public IActionResult AdminMesajSil(int id)
         {
-            return View();
+            var sil = c.AdminMesajs.Find(id);
+            c.AdminMesajs.Remove(sil);
+            c.SaveChanges();
+            return RedirectToAction("MesajKutusu", "Admin");
+        }
+
+        public IActionResult UserMesajSil(int id)
+        {
+            var sil = c.UserMesajs.Find(id);
+            c.UserMesajs.Remove(sil);
+            c.SaveChanges();
+            return RedirectToAction("MesajKutusu", "Admin");
         }
 
         public IActionResult Profilim()

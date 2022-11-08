@@ -4,5 +4,34 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h1>MesajKutusu</h1>
+<div>
+    <section class="body">
+        <!-- start: header -->
+        <!-- end: header -->
+        <div>
+            <!-- start: sidebar -->
+            <!-- end: sidebar -->
+            <section role="main" class="content-body content-body-modern mt-0">
+                <div class="row">
+                    <div class="col">
+                        <section class="card card-modern card-big-info">
 
+                            <div class="card-body">
+                                <div class="row">
+                                    @await Component.InvokeAsync("UserMesaj")
+                                </div>
+                            </div>
+
+                            <div class="card-body">
+                                <div class="row">
+                                    @await Component.InvokeAsync("AdminMesaj")
+                                </div>
+                            </div>
+
+                        </section>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </section>
+</div>

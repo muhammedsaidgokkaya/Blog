@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewData["Title"] = "UserMesajDetails";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div>
+    <section role="main" class="content-body content-body-modern mt-0">
+        <header class="page-header page-header-left-inline-breadcrumb">
+            <h2 class="font-weight-bold text-6">@Model.Mail</h2>
+        </header>
+        <div class="container">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">@Model.Baslik</h5>
+                    <h6 class="card-text">@Model.Konu</h6>
+                    <p class="card-text">@Model.Description</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

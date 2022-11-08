@@ -1,0 +1,37 @@
+﻿@using blog.Models
+@model List<UserMesaj>
+
+<div class="datatables-header-footer-wrapper mt-2">
+    <div class="datatable-header">
+        <div class="row align-items-center mb-3">
+            <div class="col-12 col-lg-auto mb-3 mb-lg-0">
+                <h4>Kullanıcı Mesajları</h4>
+            </div>
+        </div>
+    </div>
+    <table class="table table-ecommerce-simple table-striped mb-0" id="datatable-ecommerce-list" style="min-width: 550px;">
+        <thead>
+            <tr>
+                <th hidden>ID</th>
+                <th>Başlık</th>
+                <th>Konu</th>
+                <th>E-Posta</th>
+                <th>Sil</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var i in Model)
+            {
+                <tr>
+                    <td hidden>@i.Id</td>
+                    <td>@i.Baslik</td>
+                    <td>@i.Konu</td>
+                    <td><a href="mailto:@i.Mail">@i.Mail</a></td>
+                    <td><a href="/Admin/UserMesajDetails/@i.Id" class="delete-button btn btn-dark btn-px-4 py-3 d-flex align-items-center font-weight-semibold line-height-1">Detay</a></td>
+                    <td><a href="/Admin/UserMesajSil/@i.Id" class="delete-button btn btn-danger btn-px-4 py-3 d-flex align-items-center font-weight-semibold line-height-1">Sil</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <hr class="solid mt-5 opacity-4">
+</div>
