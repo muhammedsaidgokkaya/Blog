@@ -1,3 +1,5 @@
+using blog.Models;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -24,6 +26,34 @@ namespace blog
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddDistributedMemoryCache();
+            services.AddSession();
+            services.AddMvc();
+            services.AddDbContext<Context>();
+            services.AddMvc();
+
+            services.AddIdentity<AppUser, AppRole>(x =>
+            {
+                x.Password.RequireLowercase = false;
+                x.Password.RequireNonAlphanumeric = false;
+                x.Password.RequireDigit = false;
+                x.Password.RequireUppercase = false;
+                x.Password.RequiredUniqueChars = 0;
+
+
+            })
+                .AddEntityFrameworkStores<Context>();
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.AccessDeniedPath = "/ErrorPage/Error1/";
+                options.Cookie.Name = "said";
+                options.Cookie.HttpOnly = true;
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+                options.LoginPath = "/Giris/Index/";
+                options.ReturnUrlParameter = CookieAuthenticationDefaults.ReturnUrlParameter;
+                options.SlidingExpiration = true;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -40,9 +70,12 @@ namespace blog
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
+
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

@@ -1,10 +1,12 @@
 ﻿using blog.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -12,6 +14,7 @@ using System.Threading.Tasks;
 
 namespace blog.Controllers
 {
+    [Authorize(Roles = "Uye")]
     public class UserController : Controller
     {
         private readonly ILogger<UserController> _logger;
