@@ -1,8 +1,72 @@
-﻿
+﻿@model blog.Models.KullaniciGuncelleDto
+
 @{
     ViewData["Title"] = "Profilim";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h1>Profilim</h1>
+<section class="body">
+    <div class="inner-wrapper">
+        <section role="main" class="content-body card-margin">
 
+            <!-- start: page -->
+            <div class="row">
+                <div class="col">
+                    <section class="card" style="top:-155px">
+                        <div class="card-body">
+                            <div class="form-group row pb-4">
+                                <label class="col-lg-3 control-label text-lg-end pt-2">Adı Soyadı: </label>
+                                <div class="col-lg-6">
+                                    <input type="text" class="form-control" name="namesurname" value="@Model.namesurname" readonly/>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group row pb-4">
+                                <label class="col-lg-3 control-label text-lg-end pt-2">Adres Satırı 1: </label>
+                                <div class="col-lg-6">
+                                    <input type="text" class="form-control" name="Adres1" value="@Model.Adres1" readonly />
+                                </div>
+                            </div>
+                            
+                            <div class="form-group row pb-4">
+                                <label class="col-lg-3 control-label text-lg-end pt-2">Adres Satırı 2: </label>
+                                <div class="col-lg-6">
+                                    <input type="text" class="form-control" name="Adres2" value="@Model.Adres2" readonly />
+                                </div>
+                            </div>
+                            
+                            <div class="form-group row pb-4">
+                                <label class="col-lg-3 control-label text-lg-end pt-2">Adres Satırı 3: </label>
+                                <div class="col-lg-6">
+                                    <input type="text" class="form-control" name="Adres3" value="@Model.Adres3" readonly />
+                                </div>
+                            </div>
+
+                            <div class="form-group row pb-4">
+                                <label class="col-lg-3 control-label text-lg-end pt-2">Kullanıcı Adı: </label>
+                                <div class="col-lg-6">
+                                    <input class="form-control" type="text" name="username" value="@Model.username" readonly/>
+                                </div>
+                            </div>
+
+                            <div class="form-group row pb-4">
+                                <label class="col-lg-3 control-label text-lg-end pt-2">E-Mail: </label>
+                                <div class="col-lg-6">
+                                    <input class="form-control" type="text" name="email" value="@Model.email" readonly/>
+                                </div>
+                            </div>
+
+                            <div class="form-group row pb-4">
+                                <label class="col-lg-3 control-label text-lg-end pt-2">Şifre: </label>
+                                <div class="col-lg-6">
+                                    <input type="password" class="form-control" name="password" value="">
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </section>
+    </div>
+
+</section>

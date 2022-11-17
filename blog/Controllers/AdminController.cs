@@ -213,6 +213,31 @@ namespace blog.Controllers
 
         public IActionResult Profilim()
         {
+            var username = User.Identity.Name;
+            var namesurname = c.Users.Where(x => x.UserName == username).Select(y => y.namesurname).FirstOrDefault();
+            var pass = c.Users.Where(x => x.UserName == username).Select(y => y.PasswordHash).FirstOrDefault();
+            var mail = c.Users.Where(x => x.UserName == username).Select(y => y.Email).FirstOrDefault();
+            var userid = c.Users.Where(x => x.UserName == username).Select(y => y.Id).FirstOrDefault();
+            var adress1 = c.Users.Where(x => x.UserName == username).Select(y => y.Adres1).FirstOrDefault();
+            var adress2 = c.Users.Where(x => x.UserName == username).Select(y => y.Adres2).FirstOrDefault();
+            var adress3 = c.Users.Where(x => x.UserName == username).Select(y => y.Adres3).FirstOrDefault();
+            KullaniciGuncelleDto dto = new KullaniciGuncelleDto
+            {
+                namesurname = namesurname,
+                username = username,
+                password = pass,
+                email = mail,
+                Adres1 = adress1,
+                Adres2 = adress2,
+                Adres3 = adress3,
+
+            };
+
+            return View(dto);
+        }
+
+        public IActionResult ProfilDuzenle()
+        {
             return View();
         }
 
