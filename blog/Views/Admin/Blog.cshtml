@@ -27,8 +27,6 @@
                                 <th scope="col">Açıklama</th>
                                 <th scope="col">Resim</th>
                                 <th scope="col">Kategori No</th>
-                                <th scope="col">Popüler</th>
-                                <th scope="col">Trend</th>
                                 <th scope="col">Düzenle</th>
                                 <th scope="col">Sil</th>
                             </tr>
@@ -44,9 +42,7 @@
                                     <td>@x.Konu</td>
                                     <td>@x.Description</td>
                                     <td><img src="~/Resimler/Blog/@x.ResimYol" style="width:20%;" /></td>
-                                    <td>@x.CategoryBaslik</td>
-                                    <td>@x.Popular</td>
-                                    <td>@x.Trend</td>
+                                    <td>@x.CategoryId</td>
 
                                     <td>
                                         <a class="btn btn-primary" href="/Admin/BlogDuzenle/@x.Id" role="button">Düzenle</a>

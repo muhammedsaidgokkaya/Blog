@@ -9,7 +9,7 @@ using blog.Models;
 namespace blog.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20221116112325_mig")]
+    [Migration("20230205150407_mig")]
     partial class mig
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -269,17 +269,11 @@ namespace blog.Migrations
                     b.Property<string>("Konu")
                         .HasColumnType("text");
 
-                    b.Property<bool>("Popular")
-                        .HasColumnType("tinyint(1)");
-
                     b.Property<string>("ResimYol")
                         .HasColumnType("text");
 
                     b.Property<string>("Tarih")
                         .HasColumnType("text");
-
-                    b.Property<bool>("Trend")
-                        .HasColumnType("tinyint(1)");
 
                     b.HasKey("Id");
 

@@ -18,8 +18,6 @@ namespace blog.Models
         public string Konu { get; set; }
         public string Description { get; set; }
         public string Tarih { get; set; }
-        public bool Popular { get; set; }
-        public bool Trend { get; set; }
         public string ResimYol { get; set; }
         [NotMapped]
         public IFormFile Resim { get; set; }

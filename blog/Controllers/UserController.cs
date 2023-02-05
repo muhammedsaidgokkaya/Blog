@@ -1,6 +1,7 @@
 ﻿using blog.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
@@ -19,13 +20,15 @@ namespace blog.Controllers
     {
         private readonly ILogger<UserController> _logger;
         private readonly IWebHostEnvironment _webHost;
+        private readonly UserManager<AppUser> _usermanager;
 
         Context c = new Context();
 
-        public UserController(ILogger<UserController> logger, IWebHostEnvironment webHost)
+        public UserController(ILogger<UserController> logger, IWebHostEnvironment webHost, UserManager<AppUser> usermanager)
         {
             _logger = logger;
             _webHost = webHost;
+            _usermanager = usermanager;
         }
 
         public IActionResult Index()

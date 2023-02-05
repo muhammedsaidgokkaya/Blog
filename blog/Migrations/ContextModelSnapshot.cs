@@ -267,17 +267,11 @@ namespace blog.Migrations
                     b.Property<string>("Konu")
                         .HasColumnType("text");
 
-                    b.Property<bool>("Popular")
-                        .HasColumnType("tinyint(1)");
-
                     b.Property<string>("ResimYol")
                         .HasColumnType("text");
 
                     b.Property<string>("Tarih")
                         .HasColumnType("text");
-
-                    b.Property<bool>("Trend")
-                        .HasColumnType("tinyint(1)");
 
                     b.HasKey("Id");
 

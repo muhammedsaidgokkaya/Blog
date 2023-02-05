@@ -43,13 +43,13 @@ namespace blog.Controllers
                     var UserRole = context.UserRoles.Where(x => x.UserId == userid).FirstOrDefault();
                     var roleType = context.Roles.Where(x => x.Id == UserRole.RoleId).Select(y => y.RolType).FirstOrDefault();
 
-                    if (roleType == (int)UserRolTypeEnum.Admin)
-                    {
-                        return RedirectToAction("Index", "Admin");
-                    }
-                    else if (roleType == (int)UserRolTypeEnum.Uye)
+                    if(roleType == (int)UserRolTypeEnum.Uye)
                     {
                         return RedirectToAction("Index", "User");
+                    }
+                    else if(roleType == (int)UserRolTypeEnum.Admin)
+                    {
+                        return RedirectToAction("Index", "Admin");
                     }
                     else
                     {

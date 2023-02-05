@@ -252,8 +252,6 @@ namespace blog.Migrations
                     Konu = table.Column<string>(type: "text", nullable: true),
                     Description = table.Column<string>(type: "text", nullable: true),
                     Tarih = table.Column<string>(type: "text", nullable: true),
-                    Popular = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    Trend = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     ResimYol = table.Column<string>(type: "text", nullable: true),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
                     CategoryBaslik = table.Column<string>(type: "text", nullable: true)
