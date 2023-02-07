@@ -1,5 +1,54 @@
-﻿
+﻿@using blog.Models
+@model UserMesaj
+
 @{
     ViewData["Title"] = "DestekPortali";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+<div class="container pt-5">
+	<div class="container pt-3 pb-2">
+
+		<div class="row pt-2">
+			<div class="col-lg-1 mt-4 mt-lg-0">
+			</div>
+			<div class="col-lg-10">
+				<div class="col-lg-3 col-form-label form-control-label line-height-9 pb-3 text-2"><h4>Bizimle İletişime Geçin</h4></div>
+				<form id="frmSignUp" method="post">
+					<div class="form-group row">
+						<label class="col-lg-3 col-form-label form-control-label line-height-9 pt-2 text-2 required">E-Posta</label>
+						<div class="col-lg-9">
+							<input class="form-control text-3 h-auto py-2" type="email" name="Mail" value="" required="">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-lg-3 col-form-label form-control-label line-height-9 pt-2 text-2 required">Başlık</label>
+						<div class="col-lg-9">
+							<input class="form-control text-3 h-auto py-2" type="text" name="Baslik" value="" required="">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-lg-3 col-form-label form-control-label line-height-9 pt-2 text-2 required">Konu</label>
+						<div class="col-lg-9">
+							<input class="form-control text-3 h-auto py-2" type="text" name="Konu" value="" required="">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-lg-3 col-form-label form-control-label line-height-9 pt-2 text-2 required">Açıklama</label>
+						<div class="col-lg-9">
+							<input class="form-control text-3 h-auto py-2" type="text" name="Description" value="" required="">
+						</div>
+					</div>
+					<div class="form-group row">
+						<div class="form-group col-lg-9">
+						</div>
+						<div class="form-group col-lg-3">
+							<input type="submit" value="Gönder" class="btn btn-primary btn-modern float-end" data-loading-text="Loading...">
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+
+	</div>
+</div>

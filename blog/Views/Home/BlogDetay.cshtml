@@ -1,0 +1,33 @@
+﻿@{
+    ViewData["Title"] = "BlogDetay";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="wrapper">
+    <div class="container">
+        <div class="row mt-5 pb-5">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <img class="card-img-top" src="~/Resimler/Blog/@Model.ResimYol" alt="Card image cap">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5>@Model.Baslik</h5>
+                        <h6>@Model.Tarih</h6>
+                        <hr/>
+                        <h5 class="card-text">@Model.Konu</h5>
+                        <hr />
+                        <p class="card-text">@Model.Description</p>
+                        <a asp-action="Blog" asp-controller="api" asp-route-id="@Model.Id" class="btn btn-primary btn-md font-weight-semibold btn-py-2 px-4">Kaynağa Git</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br class="clear" />
+    </div>
+</div>

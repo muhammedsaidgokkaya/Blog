@@ -1,0 +1,12 @@
+﻿@using blog.Models
+@model List<Category>
+
+<div class="col-sm-4 mb-3">
+    <h4 class="font-weight-bold mb-4">Kategoriler</h4>
+    <div class="d-flex flex-wrap m-n1">
+        @foreach (var a in Model)
+        {
+            <a href="~/Home/Kategori/@a.Id" class="btn btn-sm btn-outline-secondary m-1">@a.Baslik</a>
+        }
+    </div>
+</div>

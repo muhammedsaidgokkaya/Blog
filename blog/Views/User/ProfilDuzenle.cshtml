@@ -1,0 +1,82 @@
+﻿@model blog.Models.KullaniciGuncelleDto
+
+@{
+    ViewData["Title"] = "ProfilDuzenle";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+<section class="body">
+    <div class="inner-wrapper">
+        <section role="main" class="content-body card-margin">
+            <header class="page-header page-header-left-inline-breadcrumb">
+                <h2 class="font-weight-bold text-6">Profilim Düzenle</h2>
+            </header>
+
+            <div class="row">
+                <div class="col">
+                    <section class="card" style="top:-95px">
+                        <div class="card-body">
+                            <form class="form-horizontal form-bordered" method="post">
+                                <div class="form-group row pb-4">
+                                    <label class="col-lg-3 control-label text-lg-end pt-2">Adı Soyadı: </label>
+                                    <div class="col-lg-6">
+                                        <input type="text" class="form-control" name="namesurname" value="@Model.namesurname">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row pb-4">
+                                    <label class="col-lg-3 control-label text-lg-end pt-2">Adres Satırı 1: </label>
+                                    <div class="col-lg-6">
+                                        <input type="text" class="form-control" name="Adres1" value="@Model.Adres1">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row pb-4">
+                                    <label class="col-lg-3 control-label text-lg-end pt-2">Adres Satırı 2: </label>
+                                    <div class="col-lg-6">
+                                        <input type="text" class="form-control" name="Adres2" value="@Model.Adres2">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row pb-4">
+                                    <label class="col-lg-3 control-label text-lg-end pt-2">Adres Satırı 3: </label>
+                                    <div class="col-lg-6">
+                                        <input type="text" class="form-control" name="Adres3" value="@Model.Adres3">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row pb-4">
+                                    <label class="col-lg-3 control-label text-lg-end pt-2">Kullanıcı Adı: </label>
+                                    <div class="col-lg-6">
+                                        <input class="form-control" type="text" name="username" value="@Model.username">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row pb-4">
+                                    <label class="col-lg-3 control-label text-lg-end pt-2">E-Mail: </label>
+                                    <div class="col-lg-6">
+                                        <input class="form-control" type="text" name="email" value="@Model.email">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row pb-4">
+                                    <label class="col-lg-3 control-label text-lg-end pt-2">Şifre: </label>
+                                    <div class="col-lg-6">
+                                        <input type="password" class="form-control" name="password" value="">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row pb-4">
+                                    <div class="col-lg-6" style="text-align:center;">
+                                        <button type="submit" class="btn btn-primary">Güncelle</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </section>
+    </div>
+
+</section>

@@ -55,17 +55,17 @@ namespace blog.Controllers
                             IdentityResult roleresult = await _usermanager.AddToRoleAsync(user, defaultrole);
                         }
                     }
-                    return View();
+                    return RedirectToAction("Index", "Giris");
                 }
                 else
                 {
-                    ViewBag.hatamesaji = "Şifreler Uyuşmuyor";
+                    ViewBag.hatamesaji = "Hatalı Kayıt";
                     return View();
                 }
             }
             else
             {
-                ViewBag.hatamesaji = "Şifreler Uyuşmuyor";
+                ViewBag.hatamesaji = "Hatalı Kayıt";
                 return View();
             }
         }

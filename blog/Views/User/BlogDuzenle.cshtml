@@ -17,7 +17,7 @@
             <form action="/User/BlogDuzenle" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label>Kategori Numarası</label>
-                    @Html.DropDownListFor(x => x.CategoryBaslik, (List<SelectListItem>)ViewBag.Category, new { @class = "form-control" })
+                    @Html.DropDownListFor(x => x.CategoryId, (List<SelectListItem>)ViewBag.Category, new { @class = "form-control" })
                 </div>
                 <div class="form-group">
                     <label>Id</label>
@@ -55,14 +55,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label>Popüler</label>
-                    <input type="text" class="form-control" name="Popular" />
-                </div>
-                <div class="form-group">
-                    <label>Trend</label>
-                    <input type="text" class="form-control" name="Trend" />
                 </div>
                 <button type="submit" class="btn btn-primary" value="kaydet">Kaydet</button>
             </form>

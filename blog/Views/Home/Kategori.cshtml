@@ -1,0 +1,41 @@
+﻿@using blog.Models
+@model List<Blog>
+
+@{
+    ViewData["Title"] = "Kategori";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid py-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="bg-light py-2 px-4 mb-3">
+                    <h3 class="m-0">Bloglar</h3>
+                </div>
+                <div class="owl-carousel owl-carousel-3 carousel-item-2 position-relative">
+                    @foreach (var a in Model)
+                    {
+                        <div class="position-relative">
+                            <img class="img-fluid w-100" src="~/Resimler/Blog/@a.ResimYol" style="object-fit: cover;">
+                            <div class="overlay position-relative bg-light">
+                                <div class="mb-2" style="font-size: 13px;">
+                                    <a href="~/Home/BlogDetay/@a.Id">@a.Baslik</a>
+                                    <span class="px-1">/</span>
+                                    <span>@a.Tarih</span>
+                                </div>
+                                <a class="h4 m-0" href="~/Home/BlogDetay/@a.Id">@a.Konu</a>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="d-flex align-items-center justify-content-between bg-light py-2 px-4 mb-3">
+                    <h3 class="m-0">Kategoriler</h3>
+                </div>
+                @await Component.InvokeAsync("CategoryListOne")
+            </div>
+        </div>
+    </div>
+</div>

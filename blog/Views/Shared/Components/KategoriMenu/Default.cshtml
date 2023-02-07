@@ -1,0 +1,6 @@
+﻿@using blog.Models
+@model List<Category>
+
+@foreach(var a in Model){
+    <a href="~/Home/Kategori/@a.Id" class="dropdown-item">@a.Baslik</a>
+}

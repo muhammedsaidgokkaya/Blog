@@ -1,4 +1,5 @@
-﻿using blog.Models;
+﻿using blog.Enums;
+using blog.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -33,6 +34,22 @@ namespace blog.Controllers
 
         public IActionResult Index()
         {
+            var username = User.Identity.Name;
+            var userid = c.Users.Where(x => x.UserName == username).Select(y => y.Id).FirstOrDefault();
+            var usernamesurname = c.Users.Where(x => x.UserName == username).Select(y => y.namesurname).FirstOrDefault();
+            var usermail = c.Users.Where(x => x.UserName == username).Select(y => y.Email).FirstOrDefault();
+            var userSayisi = c.Users.Count().ToString();
+            var uyeidleri = c.Users.Select(y => y.Id).ToList();
+            var blog = c.Blogs.Select(x => x.Id).Count().ToString();
+            var telefon = c.Iletisims.FirstOrDefault();
+
+            ViewBag.Phone = telefon.Phone;
+            ViewBag.Eposta = telefon.Eposta;
+            ViewBag.Saatler = telefon.Saatler;
+            ViewBag.kullaniciAdi = username;
+            ViewBag.adsoyad = usernamesurname;
+            ViewBag.mail = usermail;
+            ViewBag.blog = blog;
             return View();
         }
 
@@ -41,9 +58,76 @@ namespace blog.Controllers
             return View();
         }
 
+        [HttpPost]
+        public IActionResult MesajKutusu(AdminMesaj mesaj)
+        {
+            c.AdminMesajs.Add(mesaj);
+            c.SaveChanges();
+            return RedirectToAction("MesajKutusu", "User");
+        }
+
         public IActionResult Profilim()
         {
-            return View();
+            var username = User.Identity.Name;
+            var namesurname = c.Users.Where(x => x.UserName == username).Select(y => y.namesurname).FirstOrDefault();
+            var pass = c.Users.Where(x => x.UserName == username).Select(y => y.PasswordHash).FirstOrDefault();
+            var mail = c.Users.Where(x => x.UserName == username).Select(y => y.Email).FirstOrDefault();
+            var userid = c.Users.Where(x => x.UserName == username).Select(y => y.Id).FirstOrDefault();
+            var adress1 = c.Users.Where(x => x.UserName == username).Select(y => y.Adres1).FirstOrDefault();
+            var adress2 = c.Users.Where(x => x.UserName == username).Select(y => y.Adres2).FirstOrDefault();
+            var adress3 = c.Users.Where(x => x.UserName == username).Select(y => y.Adres3).FirstOrDefault();
+            KullaniciGuncelleDto dto = new KullaniciGuncelleDto
+            {
+                namesurname = namesurname,
+                username = username,
+                password = pass,
+                email = mail,
+                Adres1 = adress1,
+                Adres2 = adress2,
+                Adres3 = adress3,
+
+            };
+
+            return View(dto);
+        }
+
+        public IActionResult ProfilDuzenle()
+        {
+            var username = User.Identity.Name;
+            var namesurname = c.Users.Where(x => x.UserName == username).Select(y => y.namesurname).FirstOrDefault();
+            var pass = c.Users.Where(x => x.UserName == username).Select(y => y.PasswordHash).FirstOrDefault();
+            var mail = c.Users.Where(x => x.UserName == username).Select(y => y.Email).FirstOrDefault();
+            var userid = c.Users.Where(x => x.UserName == username).Select(y => y.Id).FirstOrDefault();
+            var adress1 = c.Users.Where(x => x.UserName == username).Select(y => y.Adres1).FirstOrDefault();
+            var adress2 = c.Users.Where(x => x.UserName == username).Select(y => y.Adres2).FirstOrDefault();
+            var adress3 = c.Users.Where(x => x.UserName == username).Select(y => y.Adres3).FirstOrDefault();
+            KullaniciGuncelleDto dto = new KullaniciGuncelleDto
+            {
+                namesurname = namesurname,
+                username = username,
+                password = pass,
+                email = mail,
+                Adres1 = adress1,
+                Adres2 = adress2,
+                Adres3 = adress3,
+
+            };
+            return View(dto);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ProfilDuzenle(KullaniciGuncelleDto model)
+        {
+            AppUser user = await _usermanager.FindByNameAsync(User.Identity.Name);
+            user.namesurname = model.namesurname;
+            user.UserName = model.username;
+            user.PasswordHash = _usermanager.PasswordHasher.HashPassword(user, model.password);
+            user.Email = model.email;
+            user.Adres1 = model.Adres1;
+            user.Adres2 = model.Adres2;
+            user.Adres3 = model.Adres3;
+            IdentityResult result = await _usermanager.UpdateAsync(user);
+            return RedirectToAction("Profilim", "User");
         }
 
         public IActionResult Bloglarim()
@@ -124,7 +208,6 @@ namespace blog.Controllers
             c.SaveChanges();
             return RedirectToAction("Bloglarim", "User");
         }
-
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

@@ -42,8 +42,6 @@ namespace blog.Controllers
             var usermail = c.Users.Where(x => x.UserName == username).Select(y => y.Email).FirstOrDefault();
             var userSayisi = c.Users.Count().ToString();
             var uyeidleri = c.Users.Select(y => y.Id).ToList();
-            var adminsayisi = c.UserRoles.Where(x => x.RoleId == (int)UserRolTypeEnum.Admin).Count().ToString();
-            var uyesayisi = c.UserRoles.Where(x => x.RoleId == (int)UserRolTypeEnum.Uye).Count().ToString();
             var telefon = c.Iletisims.FirstOrDefault();
 
             ViewBag.Phone = telefon.Phone;
@@ -52,8 +50,7 @@ namespace blog.Controllers
             ViewBag.kullaniciAdi = username;
             ViewBag.adsoyad = usernamesurname;
             ViewBag.mail = usermail;
-            ViewBag.adminsayisi = adminsayisi;
-            ViewBag.uyesayisi = uyesayisi;
+            ViewBag.userSayisi = userSayisi;
             return View();
         }
 
@@ -334,32 +331,6 @@ namespace blog.Controllers
                 Youtube = dto.Youtube,
             };
             c.Iletisims.Update(iletisim);
-            c.SaveChanges();
-            return RedirectToAction("Index", "Admin");
-        }
-
-        public IActionResult FooterDuzenle()
-        {
-            var footer = c.Footers.FirstOrDefault();
-            Footer dto = new Footer
-            {
-                Id = footer.Id,
-                Baslik = footer.Baslik,
-                Description = footer.Description,
-            };
-            return View(dto);
-        }
-
-        [HttpPost]
-        public IActionResult FooterDuzenle(Footer dto)
-        {
-            Footer footer = new Footer
-            {
-                Id = dto.Id,
-                Baslik = dto.Baslik,
-                Description = dto.Description,
-            };
-            c.Footers.Update(footer);
             c.SaveChanges();
             return RedirectToAction("Index", "Admin");
         }

@@ -25,11 +25,6 @@ namespace blog.Controllers
             return View();
         }
 
-        public IActionResult Hakkimizda()
-        {
-            return View();
-        }
-
         public IActionResult Iletisim()
         {
             var list = c.Iletisims.FirstOrDefault();
@@ -40,14 +35,17 @@ namespace blog.Controllers
             return View();
         }
 
-        public IActionResult Referanslar()
+        public IActionResult Kategori(int id)
         {
-            return View();
+            var categoryid = c.Categories.Find(id);
+            var icerikler = c.Blogs.Where(x => x.CategoryId == id).ToList();
+            return View(icerikler);
         }
 
-        public IActionResult ReferansDetay()
+        public IActionResult BlogDetay(int? id)
         {
-            return View();
+            var blog = c.Blogs.Find(id);
+            return View(blog);
         }
 
         public IActionResult DestekPortali()
@@ -55,9 +53,12 @@ namespace blog.Controllers
             return View();
         }
 
-        public IActionResult ContactUs()
+        [HttpPost]
+        public IActionResult DestekPortali(UserMesaj mesaj)
         {
-            return View();
+            c.UserMesajs.Add(mesaj);
+            c.SaveChanges();
+            return RedirectToAction("DestekPortali", "Home");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

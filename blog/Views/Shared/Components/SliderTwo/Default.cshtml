@@ -1,0 +1,17 @@
+﻿@using blog.Models
+@model List<Blog>
+
+@foreach (var a in Model)
+{
+    <div class="position-relative overflow-hidden" style="height: 300px;">
+        <img class="img-fluid w-100 h-100" src="~/Resimler/Blog/@a.ResimYol" style="object-fit: cover;">
+        <div class="overlay">
+            <div class="mb-1" style="font-size: 13px;">
+                <a class="text-white" href="~/Home/BlogDetay/@a.Id">@a.Baslik</a>
+                <span class="px-1 text-white">/</span>
+                <span class="text-white">@a.Tarih</span>
+            </div>
+            <a class="h4 m-0 text-white" href="~/Home/BlogDetay/@a.Id">@a.Konu</a>
+        </div>
+    </div>
+}
